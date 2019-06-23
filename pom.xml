@@ -12,9 +12,8 @@
 	<description>Starter components for Tio</description>
 	
 	<modules>
-		<module>tio-spring-boot-autoconfigure</module>
 		<module>tio-spring-boot-starter</module>
-		<module>demos</module>
+		<module>spring-boot-starter-demo</module>
 	</modules>
 	
 	<properties>
