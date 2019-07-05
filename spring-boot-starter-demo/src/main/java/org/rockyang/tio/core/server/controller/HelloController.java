@@ -1,6 +1,8 @@
 package org.rockyang.tio.core.server.controller;
 
 import org.rockyang.tio.core.server.HelloPacket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tio.core.starter.TioServerBootstrap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,8 @@ import org.tio.core.Tio;
  */
 @RestController
 public class HelloController {
+
+	static Logger logger = LoggerFactory.getLogger(HelloController.class);
 
 	@Autowired
 	private TioServerBootstrap bootstrap;
@@ -31,6 +35,7 @@ public class HelloController {
 		HelloPacket packet = new HelloPacket();
 		packet.setBody("This message is pushed by Tio Server.".getBytes(HelloPacket.CHARSET));
 		Tio.sendToAll(bootstrap.getServerGroupContext(), packet);
-		return "Push message to client successfully";
+		logger.info("Push a message to client successfully");
+		return "Push a message to client successfully";
 	}
 }
