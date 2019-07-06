@@ -1,9 +1,8 @@
-package org.tio.core.starter.annotation;
+package org.tio.common.starter.annotation;
 
 import org.springframework.stereotype.Service;
 
 /**
- * Tio Server group 监听器注解
  * @author yangjian
  */
 @Service

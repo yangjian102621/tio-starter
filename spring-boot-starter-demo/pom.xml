@@ -2,17 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
 	
+	<groupId>org.rockyang</groupId>
 	<artifactId>spring-boot-starter-demo</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<properties>
-		<tio-boot.version>3.3.3.v20190620-RELEASE</tio-boot.version>
+		<tio-boot.version>1.0.1</tio-boot.version>
+		<!--<tio-boot.version>3.3.4.v20190705-RELEASE</tio-boot.version>-->
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<skip_maven_deploy>false</skip_maven_deploy>
 	</properties>
@@ -22,12 +26,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
-		<!--<dependency>-->
-			<!--<groupId>org.rockyang</groupId>-->
-			<!--<artifactId>tio-spring-boot-starter</artifactId>-->
-			<!--<version>${tio-boot.version}</version>-->
-		<!--</dependency>-->
 		
 		<dependency>
 			<groupId>org.t-io</groupId>
@@ -43,6 +41,16 @@
 	</dependencies>
 	
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**</include>
+				</includes>
+			</resource>
+		</resources>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -57,15 +65,24 @@
 				</configuration>
 			</plugin>
 			
-			<!-- skip to deploy to repository -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>${maven-deploy-plugin.version}</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<skip>${skip_maven_deploy}</skip>
+					<fork>true</fork>
+					<addResources>true</addResources>
 				</configuration>
 			</plugin>
+			
+			<!-- skip to deploy to repository -->
+			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-deploy-plugin</artifactId>-->
+				<!--<version>${maven-deploy-plugin.version}</version>-->
+				<!--<configuration>-->
+					<!--<skip>${skip_maven_deploy}</skip>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
 		</plugins>
 	</build>
 

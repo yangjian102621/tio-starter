@@ -8,17 +8,18 @@
 	
 	<artifactId>tio-starter</artifactId>
 	<groupId>org.rockyang</groupId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>Starter components for Tio</description>
 	
 	<modules>
-		<module>tio-spring-boot-starter</module>
+		<module>tio-spring-boot-common</module>
+		<module>tio-core-spring-boot-starter</module>
 		<module>spring-boot-starter-demo</module>
 	</modules>
 	
 	<properties>
 		<spring-boot.version>2.1.5.RELEASE</spring-boot.version>
-		<tio.version>3.3.2.v20190601-RELEASE</tio.version>
+		<tio.version>3.3.4.v20190705-RELEASE</tio.version>
 		
 		<!-- versions -->
 		<java.version>1.8</java.version>

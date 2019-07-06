@@ -1,6 +1,6 @@
 package org.rockyang.tio.core.server;
 
-import org.tio.core.starter.annotation.TioServerGroupListener;
+import org.tio.common.starter.annotation.TioServerGroupListener;
 import org.tio.core.ChannelContext;
 import org.tio.core.intf.GroupListener;
 

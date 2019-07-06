@@ -2,33 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>tio-starter</artifactId>
         <groupId>org.rockyang</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
-    <artifactId>tio-spring-boot-starter</artifactId>
-
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>org.t-io</groupId>
+    <artifactId>tio-spring-boot-common</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>org.t-io</groupId>
-            <artifactId>tio-core</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
-    
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
         </dependency>
-        
     </dependencies>
-
 </project>

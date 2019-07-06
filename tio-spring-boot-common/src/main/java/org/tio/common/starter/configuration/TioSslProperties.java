@@ -1,21 +1,10 @@
-package org.tio.core.starter;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
+package org.tio.common.starter.configuration;
 
 /**
- * SSL 连接配置
- * @author yangjian
+ * @author fanpan26
  */
-@ConfigurationProperties(prefix = "tio.core.ssl")
-public class TioServerSslProperties {
-
-    /**
-     * 是否开启 SSL 连接，默认不开启
-     */
-    private boolean enabled = false;
-    /**
-     * ssl keystore 文件地址
-     */
+public class TioSslProperties {
+    private boolean enabled=false;
     private String keyStore;
 
     public boolean isEnabled() {
