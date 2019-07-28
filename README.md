@@ -278,7 +278,7 @@ public class HelloClientStarter {
 
 > 服务端输出
 
-![](https://res.t-io.org/blog/upload/img/90/411/1122413/88100466/74541313834/107/150249/screenshot_5.png)
+![](http://blog.img.r9it.com/image-808ac7fef58cfd75eb4d9e053af9c4a6.png)
 
 
 # 原生回调接口支持
@@ -333,7 +333,7 @@ public class HelloController {
 
 > 客户端输出截图
 
-![](https://res.t-io.org/blog/upload/img/90/411/1122413/88100466/74541313834/90/150322/screenshot_6.png)
+![](http://blog.img.r9it.com/image-404c49a83dd7ff0a5f2329c534cafc65.png)
 
 # SSL 支持
 
@@ -362,5 +362,4 @@ public class HelloController {
 
 ```
 
-# 完整功能的 demo 地址
-* [spring-boot-starter-demo](tree/master/spring-boot-starter-demo)
+### 完整功能请参考本项目中的 `spring-boot-starter-demo`
