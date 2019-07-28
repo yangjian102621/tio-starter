@@ -8,8 +8,9 @@ tio:
       port: 6789
       # 心跳时间
       heartbeat-timeout: 60000
-      # 集群配置 默认关闭
+      # 监控时段,多个之间用逗号隔开
       ip-stat-durations: [60]
+    # 集群配置 默认关闭
     cluster:
       enabled: false
       # 集群是通过redis的Pub/Sub实现，所以需要配置Redis
