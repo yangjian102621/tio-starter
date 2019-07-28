@@ -52,6 +52,12 @@
 			</dependency>
 			
 			<dependency>
+				<groupId>org.t-io</groupId>
+				<artifactId>tio-utils</artifactId>
+				<version>${tio.version}</version>
+			</dependency>
+			
+			<dependency>
 				<groupId>org.redisson</groupId>
 				<artifactId>redisson</artifactId>
 				<version>3.11.0</version>

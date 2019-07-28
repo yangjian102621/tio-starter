@@ -41,7 +41,7 @@ public class HelloServerIpStatListener implements IpStatListener {
 
     @Override
     public void onAfterReceivedBytes(ChannelContext channelContext, int i, IpStat ipStat) throws Exception {
-
+        System.out.println("ipStat : " + ipStat.getIp());
     }
 
     @Override

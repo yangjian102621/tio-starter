@@ -9,6 +9,7 @@ tio:
       # 心跳时间
       heartbeat-timeout: 60000
       # 集群配置 默认关闭
+      ip-stat-durations: [60]
     cluster:
       enabled: false
       # 集群是通过redis的Pub/Sub实现，所以需要配置Redis

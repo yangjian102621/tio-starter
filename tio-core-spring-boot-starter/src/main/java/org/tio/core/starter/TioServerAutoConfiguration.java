@@ -72,7 +72,7 @@ public class TioServerAutoConfiguration {
      * Tio Server bootstrap
      * */
     @Bean
-    public TioServerBootstrap webSocketServerBootstrap() {
+    public TioServerBootstrap tioServerBootstrap() {
         return new TioServerBootstrap(
                 serverProperties,
                 clusterProperties,
