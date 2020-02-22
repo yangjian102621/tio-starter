@@ -7,6 +7,7 @@
 	<packaging>pom</packaging>
 	
 	<artifactId>tio-starter</artifactId>
+	<name>${project.artifactId}</name>
 	<groupId>org.rockyang</groupId>
 	<version>1.0.1</version>
 	<description>t-io 框架的 spring-boot-starter</description>
