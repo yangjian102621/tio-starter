@@ -1,7 +1,7 @@
-package org.tio.core.starter.configuration;
+package org.rockyang.tio.core.starter.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.tio.common.starter.configuration.TioRedisClusterProperties;
+import org.rockyang.tio.common.starter.configuration.TioRedisClusterProperties;
 
 /**
  * @author fyp

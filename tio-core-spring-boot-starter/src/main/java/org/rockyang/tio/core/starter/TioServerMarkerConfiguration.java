@@ -1,4 +1,4 @@
-package org.tio.core.starter;
+package org.rockyang.tio.core.starter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

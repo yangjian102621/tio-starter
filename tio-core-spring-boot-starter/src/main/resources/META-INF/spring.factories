@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.tio.core.starter.TioServerAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.rockyang.tio.core.starter.TioServerAutoConfiguration

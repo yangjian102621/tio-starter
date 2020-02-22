@@ -1,15 +1,15 @@
-package org.tio.common.starter;
+package org.rockyang.tio.common.starter;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.codec.FstCodec;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
+import org.rockyang.tio.common.starter.configuration.TioRedisClusterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.tio.common.starter.configuration.TioRedisClusterProperties;
 
 import java.io.IOException;
 import java.net.URL;

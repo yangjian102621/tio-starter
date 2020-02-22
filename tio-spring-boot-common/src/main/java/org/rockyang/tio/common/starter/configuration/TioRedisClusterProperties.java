@@ -1,4 +1,4 @@
-package org.tio.common.starter.configuration;
+package org.rockyang.tio.common.starter.configuration;
 
 import org.redisson.config.ClusterServersConfig;
 import org.redisson.config.Config;

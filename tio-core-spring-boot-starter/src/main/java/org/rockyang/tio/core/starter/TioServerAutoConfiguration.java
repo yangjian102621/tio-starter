@@ -1,4 +1,4 @@
-package org.tio.core.starter;
+package org.rockyang.tio.core.starter;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.tio.cluster.redisson.RedissonTioClusterTopic;
-import org.tio.common.starter.RedisInitializer;
+import org.rockyang.tio.common.starter.RedisInitializer;
 import org.tio.core.intf.GroupListener;
 import org.tio.core.stat.IpStatListener;
-import org.tio.core.starter.configuration.TioServerClusterProperties;
-import org.tio.core.starter.configuration.TioServerProperties;
-import org.tio.core.starter.configuration.TioServerRedisClusterProperties;
-import org.tio.core.starter.configuration.TioServerSslProperties;
+import org.rockyang.tio.core.starter.configuration.TioServerClusterProperties;
+import org.rockyang.tio.core.starter.configuration.TioServerProperties;
+import org.rockyang.tio.core.starter.configuration.TioServerRedisClusterProperties;
+import org.rockyang.tio.core.starter.configuration.TioServerSslProperties;
 import org.tio.server.ServerGroupContext;
 import org.tio.server.intf.ServerAioHandler;
 import org.tio.server.intf.ServerAioListener;

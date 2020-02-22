@@ -1,7 +1,7 @@
-package org.tio.core.starter.annotation;
+package org.rockyang.tio.core.starter.annotation;
 
-import org.tio.core.starter.TioServerAutoConfiguration;
-import org.tio.core.starter.TioServerMarkerConfiguration;
+import org.rockyang.tio.core.starter.TioServerAutoConfiguration;
+import org.rockyang.tio.core.starter.TioServerMarkerConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
