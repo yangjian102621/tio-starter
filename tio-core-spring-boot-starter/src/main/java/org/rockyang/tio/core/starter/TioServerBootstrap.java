@@ -40,7 +40,39 @@ public final class TioServerBootstrap {
     private GroupListener groupListener;
     private ServerAioListener serverAioListener;
 
-    public TioServerBootstrap(TioServerProperties serverProperties,
+    private static volatile TioServerBootstrap tioServerBootstrap;
+    // 标记是否初始化，防止重复初始化造成端口冲突问题
+    private boolean initialized = false;
+
+    // 这里使用单例模式，解决 springboot devtools 模式下，重复启动 tio 服务造成端口冲突问题
+    public static TioServerBootstrap getInstance(TioServerProperties serverProperties,
+                              TioServerClusterProperties clusterProperties,
+                              TioServerSslProperties serverSslProperties,
+                              RedissonTioClusterTopic redissonTioClusterTopic,
+                              IpStatListener ipStatListener,
+                              GroupListener groupListener,
+                              ServerAioHandler serverAioHandler,
+                              ServerAioListener serverAioListener) {
+
+        if (tioServerBootstrap == null) { // 这里先判断一下，避免获取频繁获取同步锁造成的资源浪费。
+            synchronized (TioServerBootstrap.class) {
+                if (tioServerBootstrap == null) {
+                    tioServerBootstrap = new TioServerBootstrap(
+                            serverProperties,
+                            clusterProperties,
+                            serverSslProperties,
+                            redissonTioClusterTopic,
+                            ipStatListener,
+                            groupListener,
+                            serverAioHandler,
+                            serverAioListener);
+                }
+            }
+        }
+        return tioServerBootstrap;
+
+    }
+    private TioServerBootstrap(TioServerProperties serverProperties,
                               TioServerClusterProperties clusterProperties,
                               TioServerSslProperties serverSslProperties,
                               RedissonTioClusterTopic redissonTioClusterTopic,
@@ -66,13 +98,13 @@ public final class TioServerBootstrap {
 
     private void afterSetProperties(){
         if (this.serverAioHandler == null) {
-            throw new TioServerMsgHandlerNotFoundException();
+            throw new TioServerMsgHandlerNotFoundException("No instance of ServerAioHandler found.");
         }
         if (this.ipStatListener == null){
-            logger.warn("no bean type of IpStatListener found");
+            logger.warn("No instance of IpStatListener found");
         }
         if (this.groupListener == null){
-            logger.warn("no bean type of GroupListener found");
+            logger.warn("No instance of GroupListener found");
         }
     }
 
@@ -82,7 +114,11 @@ public final class TioServerBootstrap {
     }
 
     public void contextInitialized() {
-        logger.info("initialize tio websocket server");
+        if (initialized) {
+            logger.info("Tio server has already been initialized.");
+            return;
+        }
+        logger.info("Try to initializing tio server");
         try {
             initTioServerConfig();
             initTioServerGroupContext();

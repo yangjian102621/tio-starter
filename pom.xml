@@ -9,7 +9,7 @@
 	<artifactId>tio-starter</artifactId>
 	<name>${project.artifactId}</name>
 	<groupId>org.rockyang</groupId>
-	<version>1.0.1</version>
+	<version>1.2.0</version>
 	<description>t-io 框架的 spring-boot-starter</description>
 	<url>https://gitee.com/blackfox/tio-starter</url>
 	
@@ -22,7 +22,8 @@
 	<modules>
 		<module>tio-spring-boot-common</module>
 		<module>tio-core-spring-boot-starter</module>
-		<module>spring-boot-starter-demo</module>
+		<module>tio-websocket-spring-boot-starter</module>
+		<module>samples</module>
 	</modules>
 	
 	<properties>
@@ -143,6 +144,12 @@
 			<dependency>
 				<groupId>org.t-io</groupId>
 				<artifactId>tio-core</artifactId>
+				<version>${tio.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.t-io</groupId>
+				<artifactId>tio-websocket-server</artifactId>
 				<version>${tio.version}</version>
 			</dependency>
 			

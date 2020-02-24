@@ -12,9 +12,17 @@ tio:
       ip-stat-durations: [60]
     # 集群配置 默认关闭
     cluster:
-      enabled: false
+      enabled: true
       # 集群是通过redis的Pub/Sub实现，所以需要配置Redis
       redis:
+        #集群模式
+        #mode: cluster
+        #config-path: redis-cluster-config.json
+        # 哨兵模式
+        #mode: sentinel
+        #config-path: redis-sentinel-config.json
+        # 单机模式
+        mode: single
         ip: 127.0.0.1
         port: 6379
       all: true

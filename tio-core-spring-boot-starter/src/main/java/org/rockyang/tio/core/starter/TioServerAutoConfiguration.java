@@ -73,7 +73,7 @@ public class TioServerAutoConfiguration {
      * */
     @Bean
     public TioServerBootstrap tioServerBootstrap() {
-        return new TioServerBootstrap(
+        return TioServerBootstrap.getInstance(
                 serverProperties,
                 clusterProperties,
                 serverSslProperties,

@@ -1,0 +1,37 @@
+{
+  "sentinelServersConfig":{
+    "idleConnectionTimeout":10000,
+    "connectTimeout":10000,
+    "timeout":3000,
+    "retryAttempts":3,
+    "retryInterval":1500,
+    "failedSlaveReconnectionInterval":3000,
+    "failedSlaveCheckInterval":60000,
+    "password":null,
+    "subscriptionsPerConnection":5,
+    "clientName":null,
+    "loadBalancer":{
+      "class":"org.redisson.connection.balancer.RoundRobinLoadBalancer"
+    },
+    "subscriptionConnectionMinimumIdleSize":1,
+    "subscriptionConnectionPoolSize":50,
+    "slaveConnectionMinimumIdleSize":32,
+    "slaveConnectionPoolSize":64,
+    "masterConnectionMinimumIdleSize":32,
+    "masterConnectionPoolSize":64,
+    "readMode":"SLAVE",
+    "subscriptionMode":"SLAVE",
+    "sentinelAddresses":[
+      "redis://127.0.0.1:16001",
+      "redis://127.0.0.1:16002"
+    ],
+    "masterName":"master1",
+    "database":0
+  },
+  "threads":16,
+  "nettyThreads":32,
+  "codec":{
+    "class":"org.redisson.codec.FstCodec"
+  },
+  "transportMode":"NIO"
+}
