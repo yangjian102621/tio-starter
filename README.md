@@ -13,8 +13,7 @@ Tio 通用 TCP 服务的 spring-boot-starter 实现
 <dependency>
 	<groupId>org.t-io</groupId>
 	<artifactId>tio-core-spring-boot-starter</artifactId>
-	<!--此版本号跟着tio主版本号一致即可-->
-   <version>3.3.5.v20190712-RELEASE</version>
+   <version>1.2.0</version>
 </dependency>
 ```
 
@@ -68,12 +67,12 @@ tio:
 
 ```java
 /**
- * 消息处理 handler, 通过加 {@link TioServerMsgHandler} 注解启用，否则不会启用
+ * 消息处理 handler, 通过加 {@link TioMsgHandler} 注解启用，否则不会启用
  * 注意: handler 是必须要启用的，否则启动会抛出 {@link TioMsgHandlerNotFoundException} 异常
  *
  * @author yangjian
  */
-@TioServerMsgHandler
+@TioMsgHandler
 public class HelloServerMsgHandler implements ServerAioHandler {
 
 
@@ -288,11 +287,11 @@ public class HelloClientStarter {
 ```java
 //最主要的逻辑处理类，必须要写，否则抛异常
 public class HelloServerMsgHandler implements ServerAioHandler {}
-//可不写，通过加 @TioServerAioListener 注解启用，否则不会启用
+//可不写，通过加 @TioAioListener 注解启用，否则不会启用
 public class HelloServerAioListener implements ServerAioListener {}
-//可不写， 通过加 @TioServerGroupListener 注解启用，否则不会启用
+//可不写， 通过加 @TioGroupListener 注解启用，否则不会启用
 public class HelloServerGroupListener implements GroupListener{}
-//可不写，通过加 @link TioServerIpStatListener 注解启用，否则不会启用
+//可不写，通过加 @link TioIpStatListener 注解启用，否则不会启用
 public class HelloServerIpStatListener implements IpStatListener {}
 ```
 **这里注意：每个对应的回调接口都需要通过添加注解手动启用，否则默认不启用，不会自动扫描**
@@ -362,4 +361,5 @@ public class HelloController {
 
 ```
 
-### 完整功能请参考本项目中的 `spring-boot-starter-demo`
+### 完整功能请参考本项目中的
+[tio-core-spring-boot-starter-demo](https://gitee.com/blackfox/tio-starter/tree/master/samples/tio-core-spring-boot-starter-demo)
