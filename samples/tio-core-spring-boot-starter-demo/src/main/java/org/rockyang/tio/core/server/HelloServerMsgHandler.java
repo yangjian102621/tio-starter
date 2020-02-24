@@ -1,7 +1,7 @@
 package org.rockyang.tio.core.server;
 
 import org.rockyang.tio.common.starter.TioServerMsgHandlerNotFoundException;
-import org.rockyang.tio.common.starter.annotation.TioServerMsgHandler;
+import org.rockyang.tio.common.starter.annotation.TioMsgHandler;
 import org.tio.core.ChannelContext;
 import org.tio.core.GroupContext;
 import org.tio.core.Tio;
@@ -12,12 +12,13 @@ import org.tio.server.intf.ServerAioHandler;
 import java.nio.ByteBuffer;
 
 /**
- * 消息处理 handler, 通过加 {@link TioServerMsgHandler} 注解启用，否则不会启用
+ * 消息处理 handler, 需要实现 {@link ServerAioHandler} 接口
+ * 通过加 {@link TioMsgHandler} 注解启用，否则不会启用
  * 注意: handler 是必须要启用的，否则启动会抛出 {@link TioServerMsgHandlerNotFoundException} 异常
  *
  * @author yangjian
  */
-@TioServerMsgHandler
+@TioMsgHandler
 public class HelloServerMsgHandler implements ServerAioHandler {
 
 

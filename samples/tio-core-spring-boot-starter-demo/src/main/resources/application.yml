@@ -12,7 +12,7 @@ tio:
       ip-stat-durations: [60]
     # 集群配置 默认关闭
     cluster:
-      enabled: true
+      enabled: false
       # 集群是通过redis的Pub/Sub实现，所以需要配置Redis
       redis:
         #集群模式

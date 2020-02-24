@@ -1,5 +1,7 @@
-package org.rockyang.tio.websocket.starter;
+package org.rockyang.tio.websocket.starter.annotation;
 
+import org.rockyang.tio.websocket.starter.TioWebSocketServerAutoConfiguration;
+import org.rockyang.tio.websocket.starter.TioWebSocketServerMarkerConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

@@ -1,6 +1,6 @@
 package org.rockyang.tio.core.server;
 
-import org.rockyang.tio.common.starter.annotation.TioServerIpStatListener;
+import org.rockyang.tio.common.starter.annotation.TioIpStatListener;
 import org.tio.core.ChannelContext;
 import org.tio.core.GroupContext;
 import org.tio.core.intf.Packet;
@@ -8,12 +8,13 @@ import org.tio.core.stat.IpStat;
 import org.tio.core.stat.IpStatListener;
 
 /**
- * IP 统计监听，通过加 {@link TioServerIpStatListener} 注解启用，否则不会启用
+ * IP 统计监听，需要实现 {@link IpStatListener} 接口
+ * 通过加 {@link TioIpStatListener} 注解启用，否则不会启用
  *
  * @author yangjian
  */
-@TioServerIpStatListener
-public class HelloServerIpStatListener implements IpStatListener {
+@TioIpStatListener
+public class WsServerIpStatListener implements IpStatListener {
     @Override
     public void onExpired(GroupContext groupContext, IpStat ipStat) {
 

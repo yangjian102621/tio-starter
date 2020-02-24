@@ -118,7 +118,7 @@ public final class TioServerBootstrap {
             logger.info("Tio server has already been initialized.");
             return;
         }
-        logger.info("Try to initializing tio server");
+        logger.info("Try to initializing tio server...");
         try {
             initTioServerConfig();
             initTioServerGroupContext();

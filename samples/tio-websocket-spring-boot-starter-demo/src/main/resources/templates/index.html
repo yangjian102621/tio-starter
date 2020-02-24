@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tio Websocket Server sample page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        var uid =parseInt(Math.random()*10000);
+        var url = "ws://localhost:6789";
+        var ws =new WebSocket(url+"?uid="+uid);
+        ws.onopen = function (event) {
+            console.log("opened");
+        }
+        ws.onmessage=function (p1) {
+            console.log(p1.data);
+            appendHtml(document.getElementById('container'),'<li>'+p1.data+'</li>');
+        }
+        function send() {
+            ws.send(document.getElementById('txtInput').value);
+        }
+        function appendHtml(elem,value){
+            var node = document.createElement("div"),
+                fragment = document.createDocumentFragment(),
+                childs = null,
+                i = 0;
+            node.innerHTML = value;
+            childs = node.childNodes;
+            for( ; i < childs.length; i++){
+                fragment.appendChild(childs[i]);
+            }
+            elem.appendChild(fragment);
+            childs = null;
+            fragment = null;
+            node = null;
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <ul id="container">
+
+    </ul>
+
+    <input type="text"  id="txtInput"/>
+    <input type="button" value="发言" onclick="send()">
+
+    <a target="_blank" href="http://localhost:8888/push?message=hello-tio-websocket" >使用API推送消息</a>
+</div>
+</body>
+</html>

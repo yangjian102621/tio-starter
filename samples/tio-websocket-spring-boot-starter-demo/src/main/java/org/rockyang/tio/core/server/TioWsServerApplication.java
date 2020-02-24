@@ -1,18 +1,19 @@
 package org.rockyang.tio.core.server;
 
 
+import org.rockyang.tio.websocket.starter.annotation.EnableTioWebSocketServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.rockyang.tio.core.starter.annotation.EnableTioServerServer;
 
 /**
+ * Tio Websocket Server application
  * @author yangjian
  */
 @SpringBootApplication
-@EnableTioServerServer
-public class TioServerApplication {
+@EnableTioWebSocketServer
+public class TioWsServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TioServerApplication.class, args);
+        SpringApplication.run(TioWsServerApplication.class, args);
     }
 }

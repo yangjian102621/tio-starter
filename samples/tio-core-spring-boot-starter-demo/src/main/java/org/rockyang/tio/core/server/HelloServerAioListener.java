@@ -1,16 +1,17 @@
 package org.rockyang.tio.core.server;
 
-import org.rockyang.tio.common.starter.annotation.TioServerAioListener;
+import org.rockyang.tio.common.starter.annotation.TioAioListener;
 import org.tio.core.ChannelContext;
 import org.tio.core.intf.Packet;
 import org.tio.server.intf.ServerAioListener;
 
 /**
- * 消息监听，通过加 {@link TioServerAioListener} 注解启用，否则不会启用
+ * 消息监听，需要实现 {@link ServerAioListener} 接口
+ * 通过加 {@link TioAioListener} 注解启用，否则不会启用
  *
  * @author yangjian
  */
-@TioServerAioListener
+@TioAioListener
 public class HelloServerAioListener implements ServerAioListener {
 
 
