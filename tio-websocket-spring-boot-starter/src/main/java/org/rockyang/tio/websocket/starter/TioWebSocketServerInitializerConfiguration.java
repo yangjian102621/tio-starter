@@ -54,8 +54,15 @@ public class TioWebSocketServerInitializerConfiguration
     }
 
     @Override
-    public void stop(Runnable runnable) {
-
+    public void stop(Runnable callback)
+    {
+        /**
+         * 修复 spring-boot devtool 热启动模式下会抛出异常的 Bug
+         * support.DefaultLifecycleProcessor : Failed to shut down 1 bean with phase value 0 within timeout of 30000
+         * 而且在 idea 下面需要点击两次关闭应用才会退出
+         */
+        callback.run();
+        running = false;
     }
 
 }

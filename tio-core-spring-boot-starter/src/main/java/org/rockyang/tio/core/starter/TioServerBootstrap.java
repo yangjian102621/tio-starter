@@ -44,7 +44,7 @@ public final class TioServerBootstrap {
     // 标记是否初始化，防止重复初始化造成端口冲突问题
     private boolean initialized = false;
 
-    // 这里使用单例模式，解决 springboot devtools 模式下，重复启动 tio 服务造成端口冲突问题
+    // 这里使用单例模式，防止重复启动 tio 服务造成端口冲突问题
     public static TioServerBootstrap getInstance(TioServerProperties serverProperties,
                               TioServerClusterProperties clusterProperties,
                               TioServerSslProperties serverSslProperties,
@@ -183,5 +183,20 @@ public final class TioServerBootstrap {
 
     private void start() throws IOException {
         tioServer.start(serverProperties.getIp(), serverProperties.getPort());
+    }
+
+    /**
+     * 关闭 tio 服务，解决 springboot devtools 模式下热启动时无法关闭服务的 Bug
+     * support.DefaultLifecycleProcessor : Failed to shut down 1 bean with phase value 0 within timeout of 30000
+     */
+    public void stop()
+    {
+        if (initialized == false) {
+            logger.info("Tio Server is not yet been initialized.xxx");
+            return;
+        }
+        logger.info("Try to stop Tio Server...");
+        tioServer.stop();
+        logger.info("The Tio Server has been stopped.");
     }
 }

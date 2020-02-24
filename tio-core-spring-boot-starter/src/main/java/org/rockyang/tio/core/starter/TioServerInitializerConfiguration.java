@@ -28,9 +28,7 @@ public class TioServerInitializerConfiguration
     }
 
     @Override
-    public void stop() {
-
-    }
+    public void stop() {}
 
     @Override
     public boolean isRunning() {
@@ -52,8 +50,14 @@ public class TioServerInitializerConfiguration
     }
 
     @Override
-    public void stop(Runnable runnable) {
-
+    public void stop(Runnable callback)
+    {
+        tioServerBootstrap.stop();
+        // 如果你让 isRunning() 返回true，需要执行 stop 这个方法，那么就不要忘记调用 callback.run()。
+        // 否则在你程序退出时，Spring 的 DefaultLifecycleProcessor 会认为你这个 TestSmartLifecycle 没有 stop 完成，
+        // 程序会一直卡着结束不了，等待一定时间（默认超时时间30秒）后才会自动结束。
+        callback.run();
+        running = false;
     }
 
 }
