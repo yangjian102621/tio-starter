@@ -56,7 +56,8 @@ public final class TioWebSocketServerBootstrap {
                                                           IWsMsgHandler tioWebSocketMsgHandler,
                                                           IpStatListener ipStatListener,
                                                           GroupListener groupListener,
-                                                          WsServerAioListener serverAioListener) {
+                                                          WsServerAioListener serverAioListener)
+    {
         if (tioWebSocketServerBootstrap == null) {
             synchronized (TioWebSocketServerBootstrap.class) {
                 if (tioWebSocketServerBootstrap == null) {

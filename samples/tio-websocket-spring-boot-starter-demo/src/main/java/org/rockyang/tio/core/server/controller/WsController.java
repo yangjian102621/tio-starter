@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tio.core.Tio;
-import org.tio.utils.hutool.StrUtil;
 import org.tio.websocket.common.WsResponse;
 
 /**
@@ -37,9 +36,7 @@ public class WsController {
 	@ResponseBody
 	public String pushMessage(String message)
 	{
-		if (message == null || StrUtil.isBlank(message)) {
-			message = "This message is pushed by Tio Server.";
-		}
+		message = "服务端主动推送的消息: " + message;
 
 		Tio.sendToAll(bootstrap.getServerGroupContext(), WsResponse.fromText(message,"utf-8"));
 		logger.info("Push a message to client successfully");

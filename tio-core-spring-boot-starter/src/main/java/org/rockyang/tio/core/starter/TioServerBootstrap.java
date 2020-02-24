@@ -124,6 +124,7 @@ public final class TioServerBootstrap {
             initTioServerGroupContext();
             initTioServer();
             start();
+            initialized = true;
         }
         catch (Throwable e) {
             logger.error("Cannot bootstrap tio server :", e);

@@ -8,50 +8,60 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
     
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        var uid =parseInt(Math.random()*10000);
-        var url = "ws://localhost:6789";
-        var ws =new WebSocket(url+"?uid="+uid);
-        ws.onopen = function (event) {
-            console.log("opened");
+    <style>
+        .container {
+            width: auto;
+            max-width: 680px;
+            padding: 0 15px;
         }
-        ws.onmessage=function (p1) {
-            console.log(p1.data);
-            appendHtml(document.getElementById('container'),'<li>'+p1.data+'</li>');
+        .page-header {
+            padding-bottom: 9px;
+            margin: 40px 0 20px;
+            border-bottom: 1px solid #eee;
         }
-        function send() {
-            ws.send(document.getElementById('txtInput').value);
-        }
-        function appendHtml(elem,value){
-            var node = document.createElement("div"),
-                fragment = document.createDocumentFragment(),
-                childs = null,
-                i = 0;
-            node.innerHTML = value;
-            childs = node.childNodes;
-            for( ; i < childs.length; i++){
-                fragment.appendChild(childs[i]);
-            }
-            elem.appendChild(fragment);
-            childs = null;
-            fragment = null;
-            node = null;
-        }
-    </script>
+    </style>
+    
 </head>
 <body>
 
-<div>
-    <ul id="container">
-
-    </ul>
-
-    <input type="text"  id="txtInput"/>
-    <input type="button" value="发言" onclick="send()">
-
-    <a target="_blank" href="http://localhost:8888/push?message=hello-tio-websocket" >使用API推送消息</a>
+<div class="container">
+    <div class="page-header">
+        <h1>Sample for Tio Websocket Server</h1>
+    </div>
+    <form action="#">
+        <div class="form-group">
+            <label for="message-input">消息输入框</label>
+            <input type="text" class="form-control" id="message-input">
+        </div>
+        <button type="button" class="btn btn-primary" id="msg-send-btn">发送消息</button>
+        <a href="http://localhost:8888/push?message=hello-tio-websocket" class="btn btn-success ml-2" target="_blank">
+            使用API推送消息</a>
+    </form>
+    
+    <ul class="list-group mt-5 mb-5" id="message-box"></ul>
 </div>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    var uid = parseInt(Math.random()*10000);
+    var url = "ws://localhost:6789";
+    var ws =new WebSocket(url+"?uid="+uid);
+    ws.onopen = function (event) {
+        console.log("opened");
+    }
+    ws.onmessage=function (res) {
+        console.log(res.data);
+        $('#message-box').append('<li class="list-group-item">'+res.data+'</li>')
+    }
+    $('#msg-send-btn').click(function () {
+        var message = $('#message-input').val().trim();
+        if (message == '') {
+            alert('请输入聊天消息.');
+            return;
+        }
+        ws.send($('#message-input').val());
+    });
+</script>
 </body>
 </html>
