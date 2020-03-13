@@ -26,8 +26,6 @@ public final class TioServerBootstrap {
 
     private static final Logger logger = LoggerFactory.getLogger(TioServerBootstrap.class);
 
-    private static final String GROUP_CONTEXT_NAME = "tio-server-spring-boot-starter";
-
     private TioServerProperties serverProperties;
     private TioServerClusterProperties clusterProperties;
     private TioServerSslProperties serverSslProperties;
@@ -152,7 +150,7 @@ public final class TioServerBootstrap {
 
     private void initTioServerGroupContext()
     {
-        serverGroupContext = new ServerGroupContext(GROUP_CONTEXT_NAME, serverAioHandler, serverAioListener);
+        serverGroupContext = new ServerGroupContext(serverProperties.getGroupContextName(), serverAioHandler, serverAioListener);
         if (ipStatListener != null) {
             serverGroupContext.setIpStatListener(ipStatListener);
             serverGroupContext.ipStats.addDurations(serverProperties.getIpStatDurations());
@@ -191,12 +189,14 @@ public final class TioServerBootstrap {
      */
     public void stop()
     {
-        if (initialized == false) {
-            logger.info("Tio Server is not yet been initialized.xxx");
-            return;
+        if (serverProperties.isUseSpringBootDevtools()) {
+            if (initialized == false) {
+                logger.info("Tio Server is not yet been initialized.");
+                return;
+            }
+            logger.info("Try to stop Tio Server...");
+            tioServer.stop();
+            logger.info("The Tio Server has been stopped.");
         }
-        logger.info("Try to stop Tio Server...");
-        tioServer.stop();
-        logger.info("The Tio Server has been stopped.");
     }
 }

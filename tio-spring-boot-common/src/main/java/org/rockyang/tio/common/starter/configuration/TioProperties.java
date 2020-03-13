@@ -20,6 +20,11 @@ public class TioProperties {
     private int heartbeatTimeout = 5000;
 
     /**
+     * GroupContext name
+     */
+    private String groupContextName;
+
+    /**
      * 添加监控时段，不要添加过多的时间段，因为每个时间段都要消耗一份内存，一般加一个时间段就可以了
      */
     private Long[] ipStatDurations = {Time.MINUTE_1};
@@ -54,5 +59,15 @@ public class TioProperties {
 
     public void setIpStatDurations(Long[] ipStatDurations) {
         this.ipStatDurations = ipStatDurations;
+    }
+
+    public String getGroupContextName()
+    {
+        return groupContextName;
+    }
+
+    public void setGroupContextName(String groupContextName)
+    {
+        this.groupContextName = groupContextName;
     }
 }

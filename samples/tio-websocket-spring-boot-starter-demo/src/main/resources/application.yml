@@ -17,6 +17,7 @@ spring:
 tio:
   websocket:
     server:
+      group-context-name: tio-websocket-spring-boot-application
       # websocket port default 9876
       port: 6789
       # 心跳时间
