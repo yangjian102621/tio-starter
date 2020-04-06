@@ -8,10 +8,11 @@ import org.tio.server.intf.ServerAioListener;
 /**
  * 消息监听，需要实现 {@link ServerAioListener} 接口
  * 通过加 {@link TioAioListener} 注解启用，否则不会启用
+ * Note: Bean 的名称不能改动，否则无法注入
  *
  * @author yangjian
  */
-@TioAioListener
+@TioAioListener(name = "serverAioListener")
 public class HelloServerAioListener implements ServerAioListener {
 
 

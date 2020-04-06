@@ -8,6 +8,6 @@ import org.rockyang.tio.common.starter.annotation.TioAioListener;
  *
  * @author yangjian
  */
-@TioAioListener
+@TioAioListener(name = "wsServerAioListener")
 public class WsServerAioListener extends org.tio.websocket.server.WsServerAioListener {
 }

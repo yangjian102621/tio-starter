@@ -13,7 +13,7 @@ import org.tio.core.stat.IpStatListener;
  *
  * @author yangjian
  */
-@TioIpStatListener
+@TioIpStatListener(name = "wsIpStatListener")
 public class WsServerIpStatListener implements IpStatListener {
     @Override
     public void onExpired(GroupContext groupContext, IpStat ipStat) {

@@ -10,7 +10,7 @@ import org.tio.core.intf.GroupListener;
  *
  * @author yangjian
  */
-@TioGroupListener
+@TioGroupListener(name = "wsGroupListener")
 public class WsServerGroupListener implements GroupListener {
     @Override
     public void onAfterBind(ChannelContext channelContext, String s) throws Exception {

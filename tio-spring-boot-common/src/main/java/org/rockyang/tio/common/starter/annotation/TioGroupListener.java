@@ -7,5 +7,7 @@ import org.springframework.stereotype.Service;
  * @author yangjian
  */
 @Service
-public @interface TioGroupListener {
+public @interface TioGroupListener
+{
+	String[] name() default {};
 }

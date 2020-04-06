@@ -7,5 +7,7 @@ import org.springframework.stereotype.Service;
  * @author yangjian
  */
 @Service
-public @interface TioMsgHandler {
+public @interface TioMsgHandler
+{
+	String[] name() default {};
 }

@@ -10,10 +10,11 @@ import org.tio.core.stat.IpStatListener;
 /**
  * IP 统计监听，需要实现 {@link IpStatListener} 接口
  * 通过加 {@link TioIpStatListener} 注解启用，否则不会启用
+ * Note: Bean 的名称不能改动，否则无法注入
  *
  * @author yangjian
  */
-@TioIpStatListener
+@TioIpStatListener(name = "ipStatListener")
 public class HelloServerIpStatListener implements IpStatListener {
     @Override
     public void onExpired(GroupContext groupContext, IpStat ipStat) {
