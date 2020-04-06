@@ -13,7 +13,7 @@ Tio 通用 TCP 服务的 spring-boot-starter 实现
 <dependency>
 	<groupId>org.t-io</groupId>
 	<artifactId>tio-core-spring-boot-starter</artifactId>
-   <version>1.2.0</version>
+    <version>1.2.1</version>
 </dependency>
 ```
 
