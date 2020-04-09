@@ -7,7 +7,4 @@ import org.springframework.stereotype.Service;
  * @author yangjian
  */
 @Service
-public @interface TioAioListener
-{
-	String[] name() default {};
-}
+public @interface TioAioListener {}

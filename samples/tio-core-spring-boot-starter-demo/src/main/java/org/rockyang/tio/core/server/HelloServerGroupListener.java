@@ -11,7 +11,7 @@ import org.tio.core.intf.GroupListener;
  *
  * @author yangjian
  */
-@TioGroupListener(name = "groupListener")
+@TioGroupListener
 public class HelloServerGroupListener implements GroupListener {
     @Override
     public void onAfterBind(ChannelContext channelContext, String s) throws Exception {

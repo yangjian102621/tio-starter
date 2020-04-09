@@ -6,8 +6,9 @@ import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerCluste
 import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerProperties;
 import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerRedisClusterProperties;
 import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerSslProperties;
+import org.rockyang.tio.websocket.starter.listener.WsGroupListener;
+import org.rockyang.tio.websocket.starter.listener.WsIpStatListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,9 +18,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.tio.cluster.redisson.RedissonTioClusterTopic;
-import org.tio.core.intf.GroupListener;
-import org.tio.core.stat.IpStatListener;
-import org.tio.server.ServerGroupContext;
 import org.tio.websocket.server.WsServerAioListener;
 import org.tio.websocket.server.handler.IWsMsgHandler;
 
@@ -45,15 +43,12 @@ public class TioWebSocketServerAutoConfiguration {
     private IWsMsgHandler tioWebSocketMsgHandler;
 
     @Autowired(required = false)
-    @Qualifier(value = "wsIpStatListener")
-    private IpStatListener tioWebSocketIpStatListener;
+    private WsIpStatListener tioWebSocketIpStatListener;
 
     @Autowired(required = false)
-    @Qualifier(value = "wsGroupListener")
-    private GroupListener tioWebSocketGroupListener;
+    private WsGroupListener tioWebSocketGroupListener;
 
     @Autowired(required = false)
-    @Qualifier(value = "wsServerAioListener")
     private WsServerAioListener tioWebSocketServerAioListener;
 
     @Autowired
@@ -69,7 +64,6 @@ public class TioWebSocketServerAutoConfiguration {
     private TioWebSocketServerSslProperties serverSslProperties;
 
     @Autowired(required = false)
-    @Qualifier(value = "wsRedissonTioClusterTopic")
     private RedissonTioClusterTopic wsRedissonTioClusterTopic;
 
     /**
@@ -87,13 +81,8 @@ public class TioWebSocketServerAutoConfiguration {
                 tioWebSocketServerAioListener);
     }
 
-    @Bean
-    public ServerGroupContext wsServerGroupContext(TioWebSocketServerBootstrap bootstrap){
-        return bootstrap.getServerGroupContext();
-    }
-
     @Bean(destroyMethod="shutdown")
-    @ConditionalOnProperty(value = "tio.websocket.cluster.enabled",havingValue = "true")
+    @ConditionalOnProperty(value = "tio.websocket.cluster.enabled", havingValue = "true")
     @ConditionalOnMissingBean(name = "wsRedisInitializer")
     public RedisInitializer wsRedisInitializer(ApplicationContext applicationContext) {
         return new RedisInitializer(redisConfig, applicationContext);
@@ -105,8 +94,7 @@ public class TioWebSocketServerAutoConfiguration {
      * */
     @Bean
     @ConditionalOnBean(name = "wsRedisInitializer")
-    @ConditionalOnMissingBean(name = "wsRedissonTioClusterTopic")
-    public RedissonTioClusterTopic wsRedissonTioClusterTopic(@Qualifier(value = "wsRedisInitializer") RedisInitializer redisInitializer) {
-        return new RedissonTioClusterTopic(CLUSTER_TOPIC_CHANNEL, redisInitializer.getRedissonClient());
+    public RedissonTioClusterTopic wsRedissonTioClusterTopic(RedisInitializer wsRedisInitializer) {
+        return new RedissonTioClusterTopic(CLUSTER_TOPIC_CHANNEL, wsRedisInitializer.getRedissonClient());
     }
 }

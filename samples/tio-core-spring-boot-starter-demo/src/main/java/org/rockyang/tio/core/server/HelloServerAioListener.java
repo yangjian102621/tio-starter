@@ -1,6 +1,7 @@
 package org.rockyang.tio.core.server;
 
 import org.rockyang.tio.common.starter.annotation.TioAioListener;
+import org.rockyang.tio.core.starter.listener.SocketServerAioListener;
 import org.tio.core.ChannelContext;
 import org.tio.core.intf.Packet;
 import org.tio.server.intf.ServerAioListener;
@@ -12,13 +13,13 @@ import org.tio.server.intf.ServerAioListener;
  *
  * @author yangjian
  */
-@TioAioListener(name = "serverAioListener")
-public class HelloServerAioListener implements ServerAioListener {
+@TioAioListener
+public class HelloServerAioListener implements SocketServerAioListener {
 
 
     @Override
     public void onAfterConnected(ChannelContext channelContext, boolean isConnected, boolean isReconnect) throws Exception {
-
+        System.out.println("FUCK");
     }
 
     @Override

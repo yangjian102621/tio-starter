@@ -1,20 +1,20 @@
 package org.rockyang.tio.core.server;
 
 import org.rockyang.tio.common.starter.annotation.TioIpStatListener;
+import org.rockyang.tio.websocket.starter.listener.WsIpStatListener;
 import org.tio.core.ChannelContext;
 import org.tio.core.GroupContext;
 import org.tio.core.intf.Packet;
 import org.tio.core.stat.IpStat;
-import org.tio.core.stat.IpStatListener;
 
 /**
- * IP 统计监听，需要实现 {@link IpStatListener} 接口
+ * IP 统计监听，需要实现 {@link WsIpStatListener} 接口
  * 通过加 {@link TioIpStatListener} 注解启用，否则不会启用
  *
  * @author yangjian
  */
-@TioIpStatListener(name = "wsIpStatListener")
-public class WsServerIpStatListener implements IpStatListener {
+@TioIpStatListener
+public class WsServerIpStatListener implements WsIpStatListener {
     @Override
     public void onExpired(GroupContext groupContext, IpStat ipStat) {
 

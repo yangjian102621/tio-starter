@@ -14,7 +14,7 @@ import org.tio.core.stat.IpStatListener;
  *
  * @author yangjian
  */
-@TioIpStatListener(name = "ipStatListener")
+@TioIpStatListener
 public class HelloServerIpStatListener implements IpStatListener {
     @Override
     public void onExpired(GroupContext groupContext, IpStat ipStat) {

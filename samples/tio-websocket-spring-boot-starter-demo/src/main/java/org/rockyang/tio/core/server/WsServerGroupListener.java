@@ -1,17 +1,17 @@
 package org.rockyang.tio.core.server;
 
 import org.rockyang.tio.common.starter.annotation.TioGroupListener;
+import org.rockyang.tio.websocket.starter.listener.WsGroupListener;
 import org.tio.core.ChannelContext;
-import org.tio.core.intf.GroupListener;
 
 /**
- * Tio group 监听，需要实现 {@link GroupListener} 接口
+ * Tio group 监听，需要实现 {@link WsGroupListener} 接口
  * 通过加 {@link TioGroupListener} 注解启用，否则不会启用
  *
  * @author yangjian
  */
-@TioGroupListener(name = "wsGroupListener")
-public class WsServerGroupListener implements GroupListener {
+@TioGroupListener
+public class WsServerGroupListener implements WsGroupListener {
     @Override
     public void onAfterBind(ChannelContext channelContext, String s) throws Exception {
 
