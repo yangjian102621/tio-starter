@@ -7,7 +7,7 @@
     <parent>
         <artifactId>tio-starter</artifactId>
         <groupId>org.rockyang</groupId>
-        <version>1.2.1</version>
+        <version>1.2.2</version>
     </parent>
 
     <artifactId>tio-websocket-spring-boot-starter</artifactId>

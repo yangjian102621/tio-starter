@@ -64,7 +64,7 @@ public class TioWebSocketServerAutoConfiguration {
     private TioWebSocketServerSslProperties serverSslProperties;
 
     @Autowired(required = false)
-    private RedissonTioClusterTopic wsRedissonTioClusterTopic;
+    private RedissonTioClusterTopic redissonTioClusterTopic;
 
     /**
      * Tio WebSocket Server bootstrap
@@ -74,17 +74,17 @@ public class TioWebSocketServerAutoConfiguration {
         return TioWebSocketServerBootstrap.getInstance(serverProperties,
                 clusterProperties,
                 serverSslProperties,
-                wsRedissonTioClusterTopic,
+                redissonTioClusterTopic,
                 tioWebSocketMsgHandler,
                 tioWebSocketIpStatListener,
                 tioWebSocketGroupListener,
                 tioWebSocketServerAioListener);
     }
 
-    @Bean(destroyMethod="shutdown")
+    @Bean(name = "wsRedissonTioClusterTopic", destroyMethod="shutdown")
     @ConditionalOnProperty(value = "tio.websocket.cluster.enabled", havingValue = "true")
     @ConditionalOnMissingBean(name = "wsRedisInitializer")
-    public RedisInitializer wsRedisInitializer(ApplicationContext applicationContext) {
+    public RedisInitializer redisInitializer(ApplicationContext applicationContext) {
         return new RedisInitializer(redisConfig, applicationContext);
     }
 
@@ -92,9 +92,10 @@ public class TioWebSocketServerAutoConfiguration {
     /**
      *  RedissonTioClusterTopic  with  RedisInitializer
      * */
-    @Bean
+    @Bean(name = "wsRedissonTioClusterTopic")
     @ConditionalOnBean(name = "wsRedisInitializer")
-    public RedissonTioClusterTopic wsRedissonTioClusterTopic(RedisInitializer wsRedisInitializer) {
-        return new RedissonTioClusterTopic(CLUSTER_TOPIC_CHANNEL, wsRedisInitializer.getRedissonClient());
+    @ConditionalOnMissingBean(name = "wsRedissonTioClusterTopic")
+    public RedissonTioClusterTopic redissonTioClusterTopic(RedisInitializer redisInitializer) {
+        return new RedissonTioClusterTopic(CLUSTER_TOPIC_CHANNEL, redisInitializer.getRedissonClient());
     }
 }

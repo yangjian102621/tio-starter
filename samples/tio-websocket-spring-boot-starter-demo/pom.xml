@@ -16,7 +16,7 @@
 	<packaging>jar</packaging>
 	
 	<properties>
-		<tio-boot.version>1.2.1</tio-boot.version>
+		<tio-boot.version>1.2.2</tio-boot.version>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<skip_maven_deploy>true</skip_maven_deploy>
 		<skip_junit_test>true</skip_junit_test>
@@ -46,11 +46,11 @@
 		</dependency>
 		
 		<!-- 热部署 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-devtools</artifactId>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
 		
 	</dependencies>
 	
@@ -70,7 +70,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<fork>true</fork>
+<!--					<fork>true</fork>-->
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>

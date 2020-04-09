@@ -86,7 +86,7 @@ public class TioServerAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(value = "tio.core.cluster.enabled",havingValue = "true",matchIfMissing = true)
-    @ConditionalOnMissingBean(name = "redisInitializer")
+    @ConditionalOnMissingBean(RedisInitializer.class)
     public RedisInitializer redisInitializer(ApplicationContext applicationContext){
         return new RedisInitializer(redisConfig,applicationContext);
     }
@@ -96,8 +96,8 @@ public class TioServerAutoConfiguration {
      *  RedissonTioClusterTopic  with  RedisInitializer
      * */
     @Bean
-    @ConditionalOnBean(name = "redisInitializer")
-    @ConditionalOnMissingBean(name = "redissonTioClusterTopic")
+    @ConditionalOnBean(RedisInitializer.class)
+    @ConditionalOnMissingBean(RedissonTioClusterTopic.class)
     public RedissonTioClusterTopic redissonTioClusterTopic(RedisInitializer redisInitializer) {
         return new RedissonTioClusterTopic(CLUSTER_TOPIC_CHANNEL, redisInitializer.getRedissonClient());
     }
