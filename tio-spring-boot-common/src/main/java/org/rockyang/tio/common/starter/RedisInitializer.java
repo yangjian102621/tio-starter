@@ -17,7 +17,7 @@ import java.net.URL;
 /**
  * @author fanpan26
  */
-public final class RedisInitializer {
+public class RedisInitializer {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisInitializer.class);
 

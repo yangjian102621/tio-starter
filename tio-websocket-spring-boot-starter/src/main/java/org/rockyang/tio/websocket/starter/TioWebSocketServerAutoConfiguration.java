@@ -1,13 +1,14 @@
 package org.rockyang.tio.websocket.starter;
 
 
-import org.rockyang.tio.common.starter.RedisInitializer;
 import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerClusterProperties;
 import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerProperties;
 import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerRedisClusterProperties;
 import org.rockyang.tio.websocket.starter.configuration.TioWebSocketServerSslProperties;
 import org.rockyang.tio.websocket.starter.listener.WsGroupListener;
 import org.rockyang.tio.websocket.starter.listener.WsIpStatListener;
+import org.rockyang.tio.websocket.starter.redisson.WsRedisInitializer;
+import org.rockyang.tio.websocket.starter.redisson.WsRedissonTioClusterTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,7 +18,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.tio.cluster.redisson.RedissonTioClusterTopic;
 import org.tio.websocket.server.WsServerAioListener;
 import org.tio.websocket.server.handler.IWsMsgHandler;
 
@@ -64,7 +64,7 @@ public class TioWebSocketServerAutoConfiguration {
     private TioWebSocketServerSslProperties serverSslProperties;
 
     @Autowired(required = false)
-    private RedissonTioClusterTopic redissonTioClusterTopic;
+    private WsRedissonTioClusterTopic wsRedissonTioClusterTopic;
 
     /**
      * Tio WebSocket Server bootstrap
@@ -74,28 +74,28 @@ public class TioWebSocketServerAutoConfiguration {
         return TioWebSocketServerBootstrap.getInstance(serverProperties,
                 clusterProperties,
                 serverSslProperties,
-                redissonTioClusterTopic,
+                wsRedissonTioClusterTopic,
                 tioWebSocketMsgHandler,
                 tioWebSocketIpStatListener,
                 tioWebSocketGroupListener,
                 tioWebSocketServerAioListener);
     }
 
-    @Bean(name = "wsRedissonTioClusterTopic", destroyMethod="shutdown")
+    @Bean
     @ConditionalOnProperty(value = "tio.websocket.cluster.enabled", havingValue = "true")
-    @ConditionalOnMissingBean(name = "wsRedisInitializer")
-    public RedisInitializer redisInitializer(ApplicationContext applicationContext) {
-        return new RedisInitializer(redisConfig, applicationContext);
+    @ConditionalOnMissingBean(WsRedisInitializer.class)
+    public WsRedisInitializer wsRedisInitializer(ApplicationContext applicationContext) {
+        return new WsRedisInitializer(redisConfig, applicationContext);
     }
 
 
     /**
      *  RedissonTioClusterTopic  with  RedisInitializer
      * */
-    @Bean(name = "wsRedissonTioClusterTopic")
-    @ConditionalOnBean(name = "wsRedisInitializer")
-    @ConditionalOnMissingBean(name = "wsRedissonTioClusterTopic")
-    public RedissonTioClusterTopic redissonTioClusterTopic(RedisInitializer redisInitializer) {
-        return new RedissonTioClusterTopic(CLUSTER_TOPIC_CHANNEL, redisInitializer.getRedissonClient());
+    @Bean
+    @ConditionalOnBean(WsRedisInitializer.class)
+    @ConditionalOnMissingBean(WsRedissonTioClusterTopic.class)
+    public WsRedissonTioClusterTopic wsRedissonTioClusterTopic(WsRedisInitializer wsRedisInitializer) {
+        return new WsRedissonTioClusterTopic(CLUSTER_TOPIC_CHANNEL, wsRedisInitializer.getRedissonClient());
     }
 }
